@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import "./navigation.css";
-class Navigation extends Component {
-    navigation = (destination) =>{
-        console.log('Il y a eu un clique'+ destination)
+class Navigation extends React.Component {
+
+    navigation = (destination) => {
+        console.log(this.props);
+        this.props.onNavigation(destination);
     }
     render() {
         return (
