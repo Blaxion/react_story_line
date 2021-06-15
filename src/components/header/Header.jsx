@@ -4,19 +4,24 @@ import DemoComponent from "../DemoComponent.jsx";
 import Navigation from "./navigation.jsx";
 import DisplayTime from "./displayTime";
 class Header extends React.Component {
+    state = {
+        formatTime:"phpTime"
+    }
 
-    currentPage = "accueil";
+    currentPage = "heure";
+
     onNavigationParent =(destination) => {
         this.currentPage = destination;
         console.log(this.currentPage)
     }
 
+    handleClick=(format)=>{
+        this.setState({
+            formatTime:format
+        })
+    }
 
     render() {
-
-        
-        
-        
         return (
             <header className="App-header">
                 <Navigation  onNavigation={this.onNavigationParent}/>
@@ -28,7 +33,13 @@ class Header extends React.Component {
                 }
                 {
                     this.currentPage === "heure" &&
-                    <DisplayTime format="phpTime"/>
+                    <>
+                    <DisplayTime format={this.state.formatTime}/>
+                    <button onClick={()=>this.handleClick('jsTime')}>Javascript</button>
+                    <button onClick={()=>this.handleClick('phpTime')}>PHP</button>
+                    <button onClick={()=>this.handleClick('humanTime')}>Humain</button>
+                    </>
+                    
                 }
                 
             </header>
