@@ -1,48 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
-import DemoComponent from "../DemoComponent.jsx";
 import Navigation from "./navigation.jsx";
-import DisplayTime from "./displayTime";
+import Content from "../content/content.jsx";
 class Header extends React.Component {
     state = {
-        formatTime:"phpTime"
+        currentPage : "accueil"
     }
-
-    currentPage = "heure";
+    
 
     onNavigationParent =(destination) => {
-        this.currentPage = destination;
-        console.log(this.currentPage)
-    }
-
-    handleClick=(format)=>{
         this.setState({
-            formatTime:format
+            currentPage : destination
         })
+        
+        
     }
 
     render() {
         return (
-            <header className="App-header">
+            <div className="App-header">
+            <header className="Custom-Header" >
                 <Navigation  onNavigation={this.onNavigationParent}/>
-                <img src={logo} className="App-logo" alt="logo" />
-                <div style={{ color: 'red' }}>{this.currentPage}</div>
-                {
-                    this.currentPage === "accueil" &&
-                    <DemoComponent/>
-                }
-                {
-                    this.currentPage === "heure" &&
-                    <>
-                    <DisplayTime format={this.state.formatTime}/>
-                    <button onClick={()=>this.handleClick('jsTime')}>Javascript</button>
-                    <button onClick={()=>this.handleClick('phpTime')}>PHP</button>
-                    <button onClick={()=>this.handleClick('humanTime')}>Humain</button>
-                    </>
-                    
-                }
-                
             </header>
+            <Content currentPage ={this.state.currentPage}/>
+            </div>
         );
     }
 }
