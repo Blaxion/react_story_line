@@ -1,13 +1,23 @@
 import React from 'react';
 
 class DisplayTime extends React.Component {
+    currentPage = "heure"
+    state = {
+        dateCourante : new Date(),
+    };
 
-    currentPage = "heure";
+    componentDidMount() {
+        setInterval(() => {
+            this.setState({
+                dateCourante : new Date(),
+            })
+        }, 1000)
+    }
+    
+
     render() {
-        let dateCourante = new Date();
-        let tempsJavascript = dateCourante.getTime();
-        let datecomplete = dateCourante.toLocaleTimeString()
-        console.log(this.props);
+        let tempsJavascript = this.state.dateCourante.getTime();
+        let datecomplete = this.state.dateCourante.toLocaleTimeString();
         return (
             <div>
                 {this.props.format === 'jsTime' &&
